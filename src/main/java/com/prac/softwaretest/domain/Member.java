@@ -21,12 +21,13 @@ public class Member {
     @Column(name = "MEMBER_NAME", nullable = false, length = 10)
     private String name;
 
-    @Column(name = "AGE")
+    @Column(name = "AGE", nullable = false)
     private int age;
 
     @Builder
     public Member(String name, int age) {
         validName(name);
+        validAge(age);
         this.name = name;
         this.age = age;
     }
@@ -39,4 +40,11 @@ public class Member {
             throw new IllegalArgumentException("이름은 공백이거나 10글자를 넘을 수 없다");
         }
     }
+
+    private void validAge(int age) {
+        if (age < 0 || age > 200) {
+            throw new IllegalArgumentException("나이는 0~200 사이의 숫자여야 합니다");
+        }
+    }
+
 }
