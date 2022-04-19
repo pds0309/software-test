@@ -6,7 +6,7 @@ public class PhoneValidator implements Predicate<String> {
 
     @Override
     public boolean test(String phone) {
-        return false;
+        return phone.startsWith("+82") && phone.length() == 13;
     }
 
 }
