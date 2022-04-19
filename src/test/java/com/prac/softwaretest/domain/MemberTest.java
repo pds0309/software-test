@@ -47,10 +47,21 @@ class MemberTest {
         assertThrows(IllegalArgumentException.class, () -> {
             Member.builder()
                     .name(name)
-                    .age(25)
+                    .age(SUCCESS_AGE)
                     .build();
         });
     }
 
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 201})
+    @DisplayName("Member의 나이는 0 미만이거나 200 초과일 수 없습니다")
+    void initMemberFailWithInvalidAgeParameter(int age) {
+        assertThrows(IllegalArgumentException.class, () -> {
+            Member.builder()
+                    .name(SUCCESS_NAME)
+                    .age(age)
+                    .build();
+        });
+    }
 
 }
