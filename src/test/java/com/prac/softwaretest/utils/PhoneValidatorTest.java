@@ -14,7 +14,13 @@ class PhoneValidatorTest {
 
     @Test
     void itShouldValidatePhoneNumber() {
+        // Given
+        String phone = "+821065645159";
 
+        // When
+        boolean isValid = validator.test(phone);
+        
+        // Then
     }
 
 }
