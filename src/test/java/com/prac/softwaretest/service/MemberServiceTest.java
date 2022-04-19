@@ -2,32 +2,32 @@ package com.prac.softwaretest.service;
 
 import com.prac.softwaretest.domain.Member;
 import com.prac.softwaretest.domain.SampleMember;
+import com.prac.softwaretest.dto.SignUpRequest;
+import com.prac.softwaretest.dto.SignUpResponse;
 import com.prac.softwaretest.repository.MemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
 
 /**
  * 요구사항 : 회원 가입
  */
 
-class MemberServiceMockTest {
+@SpringBootTest
+class MemberServiceTest {
 
-    @Mock
+    @Autowired
     private MemberRepository memberRepository;
 
     private MemberService memberService;
 
     @BeforeEach
     void setUp() {
-        memberService = new MemberService();
+        memberService = new MemberService(memberRepository);
     }
 
     @Test
@@ -39,11 +39,11 @@ class MemberServiceMockTest {
                         .age(SampleMember.SUCCESS_AGE)
                         .build();
 
-        Member member = SampleMember.of();
-        given(memberRepository.save(member)).willReturn(member);
         SignUpResponse signUpResponse = memberService.saveMember(signUpRequest);
-
         assertNotNull(signUpResponse);
-        assertEquals(member.getId(), signUpResponse.getId());
+
+        Member member = memberRepository.findById(signUpResponse.getId()).orElse(null);
+        assertNotNull(member);
     }
+    
 }
