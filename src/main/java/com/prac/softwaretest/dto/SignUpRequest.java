@@ -2,12 +2,13 @@ package com.prac.softwaretest.dto;
 
 
 import com.prac.softwaretest.domain.Member;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import javax.validation.constraints.*;
 
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class SignUpRequest {
 
