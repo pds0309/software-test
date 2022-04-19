@@ -16,7 +16,15 @@ public class MemberService {
 
     public SignUpResponse saveMember(SignUpRequest signUpRequest) {
 
+        checkDuplicatedName(signUpRequest.getName());
+
         Member member = memberRepository.save(signUpRequest.toEntity());
         return new SignUpResponse(member.getId());
+    }
+
+    private void checkDuplicatedName(String name) {
+        if (memberRepository.findByName(name).isPresent()) {
+            throw new RuntimeException("중복되는 이름이 있다.");
+        }
     }
 }

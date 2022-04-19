@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.transaction.Transactional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -19,6 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 @SpringBootTest
+@Transactional
 class MemberServiceTest {
 
     @Autowired
@@ -51,6 +54,11 @@ class MemberServiceTest {
     @Nested
     @DisplayName("회원가입을 할 수 없다")
     class DoNotSaveMember {
+
+//        @BeforeEach
+//        void setUp() {
+//            memberRepository.deleteAll();
+//        }
 
         @Test
         @DisplayName("이미 있는 이름으로 회원가입 요청을 한다면")
