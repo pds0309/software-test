@@ -7,6 +7,7 @@ import com.prac.softwaretest.dto.SignUpResponse;
 import com.prac.softwaretest.repository.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -45,5 +46,31 @@ class MemberServiceTest {
         Member member = memberRepository.findById(signUpResponse.getId()).orElse(null);
         assertNotNull(member);
     }
-    
+
+
+    @Nested
+    @DisplayName("회원가입을 할 수 없다")
+    class DoNotSaveMember {
+
+        @Test
+        @DisplayName("이미 있는 이름으로 회원가입 요청을 한다면")
+        void duplicatedMemberName() {
+
+            Member alreadySavedMember = memberRepository.save(SampleMember.of());
+
+            SignUpRequest signUpRequest =
+                    SignUpRequest.builder()
+                            .name(SampleMember.SUCCESS_NAME)
+                            .age(SampleMember.SUCCESS_AGE)
+                            .build();
+
+            assertEquals(alreadySavedMember.getName(), signUpRequest.getName());
+
+            assertThrows(RuntimeException.class, () -> {
+                memberService.saveMember(signUpRequest);
+            });
+        }
+
+    }
+
 }
