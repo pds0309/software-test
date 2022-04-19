@@ -1,7 +1,10 @@
 package com.prac.softwaretest.utils;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class PhoneValidatorTest {
 
@@ -19,8 +22,9 @@ class PhoneValidatorTest {
 
         // When
         boolean isValid = validator.test(phone);
-        
+
         // Then
+        assertTrue(isValid);
     }
 
 }

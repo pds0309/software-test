@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 public class PhoneValidator implements Predicate<String> {
 
     @Override
-    public boolean test(String s) {
+    public boolean test(String phone) {
         return false;
     }
 
