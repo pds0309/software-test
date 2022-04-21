@@ -2,9 +2,11 @@ package com.prac.softwaretest.service;
 
 import com.prac.softwaretest.domain.Member;
 import com.prac.softwaretest.domain.SampleMember;
+import com.prac.softwaretest.dto.MemberInfoResponse;
 import com.prac.softwaretest.dto.SignUpRequest;
 import com.prac.softwaretest.dto.SignUpResponse;
 import com.prac.softwaretest.repository.MemberRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -14,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -79,6 +82,31 @@ class MemberServiceTest {
             });
         }
 
+    }
+
+
+    @Nested
+    @DisplayName("아이디로의 회원 조회")
+    class FindMemberById {
+        private Member member = null;
+
+        @BeforeEach
+        void setMember() {
+            member = memberRepository.save(SampleMember.of());
+        }
+
+        @Test
+        @DisplayName("존재하는 아이디에 대한 조회 요청 시 결과를 성공적으로 응답한다")
+        void itShouldReturnResult() {
+            //given
+            Long id = member.getId();
+            //when
+            MemberInfoResponse memberInfoResponse = memberService.findById(id);
+            //then
+            assertThat(memberInfoResponse).isNotNull();
+            assertThat(memberInfoResponse.getId()).isEqualTo(id);
+            assertThat(memberInfoResponse.getName()).isEqualTo(SampleMember.SUCCESS_NAME);
+        }
     }
 
 }
