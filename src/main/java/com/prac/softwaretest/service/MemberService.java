@@ -33,7 +33,8 @@ public class MemberService {
 
     public MemberInfoResponse findById(Long id) {
 
-        Member member = memberRepository.findById(id).get();
+        Member member = memberRepository.findById(id)
+                .orElseThrow(MemberNotFoundException::new);
 
         return MemberInfoResponse.builder()
                 .id(member.getId())
