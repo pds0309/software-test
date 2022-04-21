@@ -19,4 +19,14 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
+
+    // 원래 커스텀 해야되지만 귀찮아서 그냥 함
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResponse> RuntimeExceptionHandler(RuntimeException e) {
+        ErrorResponse errorResponse =
+                ErrorResponse.builder()
+                        .errorCode(ErrorCode.CONFLICTED_REQUEST)
+                        .build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(errorResponse);
+    }
 }
