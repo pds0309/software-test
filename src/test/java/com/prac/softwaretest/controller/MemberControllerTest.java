@@ -5,6 +5,7 @@ import com.prac.softwaretest.domain.SampleMember;
 import com.prac.softwaretest.dto.MemberInfoResponse;
 import com.prac.softwaretest.dto.SignUpRequest;
 import com.prac.softwaretest.dto.SignUpResponse;
+import com.prac.softwaretest.exception.MemberNotFoundException;
 import com.prac.softwaretest.service.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -112,7 +113,7 @@ class MemberControllerTest {
                         .willThrow(new MemberNotFoundException());
 
                 //when
-                mvc.perform(post("/api/v1/members/" + SampleMember.NOT_EXIST_MEMBER_ID))
+                mvc.perform(get("/api/v1/members/" + SampleMember.NOT_EXIST_MEMBER_ID))
                         .andExpect(status().isNotFound())
                         .andDo(print());
             }
