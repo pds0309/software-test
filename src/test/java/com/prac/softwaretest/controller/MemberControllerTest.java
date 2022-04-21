@@ -100,6 +100,25 @@ class MemberControllerTest {
             }
         }
 
+        @DisplayName("등록되지 않은 Member Id 를 입력 받았어요")
+        @Nested
+        class NotExistsResourceRequest {
+
+            @DisplayName("404:NOT_FOUND 예외를 반환")
+            @Test
+            void itShouldThrowsNotFoundException() throws Exception {
+                //given
+                given(memberService.findById(SampleMember.NOT_EXIST_MEMBER_ID))
+                        .willThrow(new MemberNotFoundException());
+
+                //when
+                mvc.perform(post("/api/v1/members/" + SampleMember.NOT_EXIST_MEMBER_ID))
+                        .andExpect(status().isNotFound())
+                        .andDo(print());
+            }
+
+        }
+
     }
 
 }
