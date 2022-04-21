@@ -5,6 +5,7 @@ import com.prac.softwaretest.domain.SampleMember;
 import com.prac.softwaretest.dto.MemberInfoResponse;
 import com.prac.softwaretest.dto.SignUpRequest;
 import com.prac.softwaretest.dto.SignUpResponse;
+import com.prac.softwaretest.exception.MemberNotFoundException;
 import com.prac.softwaretest.repository.MemberRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -106,6 +107,16 @@ class MemberServiceTest {
             assertThat(memberInfoResponse).isNotNull();
             assertThat(memberInfoResponse.getId()).isEqualTo(id);
             assertThat(memberInfoResponse.getName()).isEqualTo(SampleMember.SUCCESS_NAME);
+        }
+
+        @Test
+        @DisplayName("존재하지 않는 아이디에 대한 조회 요청 시 예외를 반환합니다")
+        void itShouldThrowMemberNotFoundException() {
+            //given
+            Long id = SampleMember.NOT_EXIST_MEMBER_ID;
+            //when
+            assertThatThrownBy(() -> memberService.findById(id))
+                    .isInstanceOf(MemberNotFoundException.class);
         }
     }
 
