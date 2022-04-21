@@ -5,6 +5,7 @@ import com.prac.softwaretest.domain.Member;
 import com.prac.softwaretest.dto.MemberInfoResponse;
 import com.prac.softwaretest.dto.SignUpRequest;
 import com.prac.softwaretest.dto.SignUpResponse;
+import com.prac.softwaretest.exception.MemberNotFoundException;
 import com.prac.softwaretest.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,15 @@ public class MemberService {
         }
     }
 
+
     public MemberInfoResponse findById(Long id) {
-        return null;
+
+        Member member = memberRepository.findById(id).get();
+
+        return MemberInfoResponse.builder()
+                .id(member.getId())
+                .name(member.getName())
+                .build();
     }
+
 }
