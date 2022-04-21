@@ -2,6 +2,7 @@ package com.prac.softwaretest.service;
 
 
 import com.prac.softwaretest.domain.Member;
+import com.prac.softwaretest.dto.MemberInfoResponse;
 import com.prac.softwaretest.dto.SignUpRequest;
 import com.prac.softwaretest.dto.SignUpResponse;
 import com.prac.softwaretest.repository.MemberRepository;
@@ -26,5 +27,9 @@ public class MemberService {
         if (memberRepository.findByName(name).isPresent()) {
             throw new RuntimeException("중복되는 이름이 있다.");
         }
+    }
+
+    public MemberInfoResponse findById(Long id) {
+        return null;
     }
 }
