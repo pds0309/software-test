@@ -7,7 +7,6 @@ import com.prac.softwaretest.dto.SignUpRequest;
 import com.prac.softwaretest.dto.SignUpResponse;
 import com.prac.softwaretest.exception.MemberNotFoundException;
 import com.prac.softwaretest.service.MemberService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -18,17 +17,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.filter.CharacterEncodingFilter;
 
-import java.nio.charset.StandardCharsets;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.mockito.BDDMockito.any;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.mockito.BDDMockito.*;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(MemberController.class)
@@ -58,6 +54,7 @@ class MemberControllerTest {
                 SignUpRequest.builder()
                         .name(SampleMember.SUCCESS_NAME)
                         .age(SampleMember.SUCCESS_AGE)
+                        .password("1234")
                         .build();
         // given
 //        SignUpResponse signUpResponse = new SignUpResponse(1L);

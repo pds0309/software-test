@@ -8,7 +8,7 @@ public class SampleMember {
     public static final Long NOT_EXIST_MEMBER_ID = 0L;
 
     public static Member of() {
-        return new Member(SUCCESS_NAME, SUCCESS_AGE);
+        return new Member(SUCCESS_NAME, SUCCESS_AGE, "1234");
     }
 
 }

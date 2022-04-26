@@ -14,8 +14,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.*;
 import org.springframework.test.context.ActiveProfiles;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 // 실제 Servlet 환경에서 테스트
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -111,8 +110,9 @@ class MemberIntegrationTest {
             // existed real member : 김갑환
             SignUpRequest signUpRequest =
                     SignUpRequest.builder()
-                            .name("최번개")
+                            .name("초이번개")
                             .age(24)
+                            .password("1234")
                             .build();
             HttpEntity<SignUpRequest> request = new HttpEntity<>(signUpRequest, headers);
             assertThat(
@@ -145,6 +145,7 @@ class MemberIntegrationTest {
                     SignUpRequest.builder()
                             .name("김갑환")
                             .age(24)
+                            .password("1234")
                             .build();
             assertThat(
                     testRestTemplate.exchange(

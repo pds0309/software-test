@@ -21,10 +21,14 @@ public class SignUpRequest {
     @Max(value = 200)
     private Integer age;
 
+    @NotNull
+    private String password;
+
     public Member toEntity() {
         return Member.builder()
                 .name(name)
                 .age(age)
+                .password(password)
                 .build();
     }
 }

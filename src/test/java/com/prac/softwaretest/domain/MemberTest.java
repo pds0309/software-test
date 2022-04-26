@@ -33,7 +33,7 @@ class MemberTest {
     @DisplayName("멤버 객체를 초기화 할 수 있다.")
     void initMemberTest() {
         // given + when
-        member = new Member(SUCCESS_NAME, SUCCESS_AGE);
+        member = new Member(SUCCESS_NAME, SUCCESS_AGE, "1234");
         // then
         assertEquals(SUCCESS_NAME, member.getName());
         assertEquals(SUCCESS_AGE, member.getAge());

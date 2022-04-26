@@ -21,15 +21,19 @@ public class Member {
     @Column(name = "MEMBER_NAME", nullable = false, length = 10, unique = true)
     private String name;
 
+    @Column(name = "PASSWORD", nullable = false)
+    private String password;
+
     @Column(name = "AGE", nullable = false)
     private int age;
 
     @Builder
-    public Member(String name, int age) {
+    public Member(String name, int age, String password) {
         validName(name);
         validAge(age);
         this.name = name;
         this.age = age;
+        this.password = password;
     }
 
     private void validName(String name) {
