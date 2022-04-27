@@ -27,6 +27,10 @@ public class Member {
     @Column(name = "AGE", nullable = false)
     private int age;
 
+    @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "varchar(20) default 'NORMAL'")
+    private RoleType roleType;
+
     @Builder
     public Member(String name, int age, String password) {
         validName(name);
@@ -34,6 +38,7 @@ public class Member {
         this.name = name;
         this.age = age;
         this.password = password;
+        this.roleType = RoleType.NORMAL;
     }
 
     private void validName(String name) {

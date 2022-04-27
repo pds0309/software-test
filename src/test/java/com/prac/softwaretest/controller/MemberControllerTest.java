@@ -6,18 +6,22 @@ import com.prac.softwaretest.dto.MemberInfoResponse;
 import com.prac.softwaretest.dto.SignUpRequest;
 import com.prac.softwaretest.dto.SignUpResponse;
 import com.prac.softwaretest.exception.MemberNotFoundException;
+import com.prac.softwaretest.security.SecurityConfig;
 import com.prac.softwaretest.service.MemberService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import static org.mockito.BDDMockito.any;
 import static org.mockito.BDDMockito.given;
@@ -26,8 +30,13 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@ExtendWith(SpringExtension.class)
-@WebMvcTest(MemberController.class)
+// @WebMvcTest 의 경우 스프링 시큐리티도 빈 스캔 대상에 포함되어져 주입됨
+// 이 경우 Spring Security에 보통 다른 여러 의존성들이 포함되어 있는데 얘네들 때매 다음과 같은 예외 발생함
+//Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityConfig' defined in file [D:\spring_security_basic\software-test\software-test\target\classes\com\prac\softwaretest\security\SecurityConfig.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'org.springframework.security.crypto.password.PasswordEncoder' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+@WebMvcTest(controllers = MemberController.class,
+        excludeFilters = {
+        // SecurityConfig 에 대한 의존성을 테스트를 위한 스캔 대상에서 제외함
+                @ComponentScan.Filter(type = FilterType.ASSIGNABLE_TYPE, classes = SecurityConfig.class)})
 class MemberControllerTest {
 
     @Autowired
@@ -39,13 +48,14 @@ class MemberControllerTest {
     @MockBean
     private MemberService memberService;
 
-//    @BeforeEach
-//    void setUp() {
-//        this.mvc = MockMvcBuilders
-//                .standaloneSetup(new MemberController(memberService))
-//                .addFilter(new CharacterEncodingFilter(StandardCharsets.UTF_8.name(), true))
-//                .build();
-//    }
+    @Autowired
+    private WebApplicationContext context;
+
+    @BeforeEach
+    void setUp() {
+        this.mvc = MockMvcBuilders
+            .webAppContextSetup(context).build();
+    }
 
     @Test
     @DisplayName("POST: /api/v1/members : 회원을 저장합니다")
