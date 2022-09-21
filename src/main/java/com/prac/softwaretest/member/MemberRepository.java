@@ -1,4 +1,4 @@
-package com.prac.softwaretest.repository;
+package com.prac.softwaretest.member;
 
 import com.prac.softwaretest.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;

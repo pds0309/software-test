@@ -1,4 +1,4 @@
-package com.prac.softwaretest.service;
+package com.prac.softwaretest.member;
 
 
 import com.prac.softwaretest.domain.Member;
@@ -6,7 +6,6 @@ import com.prac.softwaretest.dto.MemberInfoResponse;
 import com.prac.softwaretest.dto.SignUpRequest;
 import com.prac.softwaretest.dto.SignUpResponse;
 import com.prac.softwaretest.exception.MemberNotFoundException;
-import com.prac.softwaretest.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

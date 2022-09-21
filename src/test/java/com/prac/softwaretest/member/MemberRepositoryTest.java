@@ -1,8 +1,8 @@
-package com.prac.softwaretest.repository;
+package com.prac.softwaretest.member;
 
 import com.prac.softwaretest.domain.Member;
 import com.prac.softwaretest.domain.SampleMember;
-import org.junit.jupiter.api.Assertions;
+import com.prac.softwaretest.member.MemberRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

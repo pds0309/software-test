@@ -1,4 +1,4 @@
-package com.prac.softwaretest.controller;
+package com.prac.softwaretest.member;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.prac.softwaretest.domain.SampleMember;
@@ -6,8 +6,8 @@ import com.prac.softwaretest.dto.MemberInfoResponse;
 import com.prac.softwaretest.dto.SignUpRequest;
 import com.prac.softwaretest.dto.SignUpResponse;
 import com.prac.softwaretest.exception.MemberNotFoundException;
-import com.prac.softwaretest.service.MemberService;
-import org.junit.jupiter.api.BeforeEach;
+import com.prac.softwaretest.member.MemberController;
+import com.prac.softwaretest.member.MemberService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -18,12 +18,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.filter.CharacterEncodingFilter;
-
-import java.nio.charset.StandardCharsets;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

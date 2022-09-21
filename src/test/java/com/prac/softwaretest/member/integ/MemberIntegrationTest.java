@@ -1,11 +1,11 @@
-package com.prac.softwaretest.integ;
+package com.prac.softwaretest.member.integ;
 
 
 import com.prac.softwaretest.domain.Member;
 import com.prac.softwaretest.domain.SampleMember;
 import com.prac.softwaretest.dto.MemberInfoResponse;
 import com.prac.softwaretest.dto.SignUpRequest;
-import com.prac.softwaretest.repository.MemberRepository;
+import com.prac.softwaretest.member.MemberRepository;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,7 +15,6 @@ import org.springframework.http.*;
 import org.springframework.test.context.ActiveProfiles;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.mockito.BDDMockito.*;
 
 // 실제 Servlet 환경에서 테스트
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)

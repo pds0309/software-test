@@ -1,4 +1,4 @@
-package com.prac.softwaretest.service;
+package com.prac.softwaretest.member;
 
 import com.prac.softwaretest.domain.Member;
 import com.prac.softwaretest.domain.SampleMember;
@@ -6,8 +6,8 @@ import com.prac.softwaretest.dto.MemberInfoResponse;
 import com.prac.softwaretest.dto.SignUpRequest;
 import com.prac.softwaretest.dto.SignUpResponse;
 import com.prac.softwaretest.exception.MemberNotFoundException;
-import com.prac.softwaretest.repository.MemberRepository;
-import org.assertj.core.api.Assertions;
+import com.prac.softwaretest.member.MemberRepository;
+import com.prac.softwaretest.member.MemberService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;

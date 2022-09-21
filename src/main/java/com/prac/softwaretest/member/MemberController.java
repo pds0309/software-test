@@ -1,9 +1,8 @@
-package com.prac.softwaretest.controller;
+package com.prac.softwaretest.member;
 
 import com.prac.softwaretest.dto.MemberInfoResponse;
 import com.prac.softwaretest.dto.SignUpRequest;
 import com.prac.softwaretest.dto.SignUpResponse;
-import com.prac.softwaretest.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
